@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace GsimGUI.Backend
 {
@@ -14,30 +13,30 @@ namespace GsimGUI.Backend
             Id = id;
         }
 
-        public void ConnectInput(uint inputIndex, in IList<Wire> wires)
+        public void ConnectInput(uint inputIndex, ReadOnlySpan<Wire> wires)
         {
-            if (wires.Count <= 64)
+            if (wires.Length <= 64)
             {
-                Span<WireId> wireIds = stackalloc WireId[wires.Count];
-                for (int i = 0; i < wires.Count; i++)
+                Span<WireId> wireIds = stackalloc WireId[wires.Length];
+                for (int i = 0; i < wires.Length; i++)
                     wireIds[i] = wires[i].Id;
 
                 unsafe
                 {
                     fixed (WireId* ptr = wireIds)
-                        Gsim.ComponentConnectInput(simulator.ToPointer(), Id, inputIndex, (uint)wires.Count, ptr);
+                        Gsim.ComponentConnectInput(simulator.ToPointer(), Id, inputIndex, (uint)wires.Length, ptr);
                 }
             }
             else
             {
-                var wireIds = new WireId[wires.Count];
-                for (int i = 0; i < wires.Count; i++)
+                var wireIds = new WireId[wires.Length];
+                for (int i = 0; i < wires.Length; i++)
                     wireIds[i] = wires[i].Id;
 
                 unsafe
                 {
                     fixed (WireId* ptr = wireIds)
-                        Gsim.ComponentConnectInput(simulator.ToPointer(), Id, inputIndex, (uint)wires.Count, ptr);
+                        Gsim.ComponentConnectInput(simulator.ToPointer(), Id, inputIndex, (uint)wires.Length, ptr);
                 }
             }
         }
