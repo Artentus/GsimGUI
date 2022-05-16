@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace GsimGUI.Models
 {
@@ -106,17 +108,17 @@ namespace GsimGUI.Models
 
     internal sealed class DirectionProperty : Property
     {
-        private Models.Direction _value;
+        private Direction _value;
 
-        public Models.Direction DefaultValue { get; }
+        public Direction DefaultValue { get; }
 
-        public Models.Direction Value
+        public Direction Value
         {
             get => _value;
             set => SetProperty(ref _value, value);
         }
 
-        public DirectionProperty(string name, Models.Direction defaultValue)
+        public DirectionProperty(string name, Direction defaultValue)
             : base(name)
         {
             DefaultValue = defaultValue;
@@ -125,5 +127,21 @@ namespace GsimGUI.Models
 
         public override void Reset()
             => Value = DefaultValue;
+    }
+
+    internal interface IHasProperties : INotifyPropertyChanged
+    {
+        string Name { get; }
+
+        IReadOnlyList<Property> Properties { get; }
+    }
+
+    internal static class HasProperties
+    {
+        public static void ResetAll(this IHasProperties component)
+        {
+            foreach (var property in component.Properties)
+                property.Reset();
+        }
     }
 }

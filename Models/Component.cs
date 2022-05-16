@@ -15,8 +15,10 @@ namespace GsimGUI.Models
         public Bus? ConnectedBus { get; set; } = null;
     }
 
-    internal abstract class Component : PropertyChangedBase
+    internal abstract class Component : PropertyChangedBase, IHasProperties
     {
+        public string Name { get; }
+
         public abstract IReadOnlyList<Property> Properties { get; }
 
         protected void RegisterPropertyEvents()
@@ -32,5 +34,10 @@ namespace GsimGUI.Models
         }
 
         public abstract IReadOnlyList<Connection> Connections { get; }
+
+        protected Component(string name)
+        {
+            Name = name;
+        }
     }
 }

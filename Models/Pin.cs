@@ -26,6 +26,7 @@ namespace GsimGUI.Models
         public override IReadOnlyList<Connection> Connections => new Connection[] { _connection };
 
         public Pin()
+            : base(nameof(Pin))
         {
             Properties = new Property[] { _widthProperty, _directionProperty };
             RegisterPropertyEvents();

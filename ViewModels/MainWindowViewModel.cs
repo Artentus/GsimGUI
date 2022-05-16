@@ -1,11 +1,18 @@
 using GsimGUI.Models;
-using System;
 
 namespace GsimGUI.ViewModels
 {
     internal class MainWindowViewModel : ViewModelBase
     {
-        public Component? SelectedComponent { get; set; }
+        private IHasProperties? _selectedComponent;
+
+        public Theme Theme => App.Current!.Theme;
+
+        public IHasProperties? SelectedComponent
+        {
+            get => _selectedComponent;
+            set => SetProperty(ref _selectedComponent, value);
+        }
 
         public MainWindowViewModel()
         {
