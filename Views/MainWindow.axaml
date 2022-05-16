@@ -1,17 +1,86 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:GsimGUI.ViewModels"
+        xmlns:model="using:GsimGUI.Models"
+        xmlns:local="using:GsimGUI"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="GsimGUI.Views.MainWindow"
-        Icon="/Assets/avalonia-logo.ico"
-        Title="GsimGUI">
+        Icon="/Assets/avalonia-logo.ico" Title="GsimGUI"
+        Width="1600" Height="900"
+        ExtendClientAreaToDecorationsHint="True"
+        ExtendClientAreaChromeHints="PreferSystemChrome">
 
-    <Design.DataContext>
-        <vm:MainWindowViewModel/>
-    </Design.DataContext>
+  <Design.DataContext>
+    <vm:MainWindowViewModel/>
+  </Design.DataContext>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+  <Panel>
+    <Border
+      BorderThickness="1"
+      BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
+      Background="{DynamicResource SystemControlBackgroundBaseLowBrush}"
+      IsHitTestVisible="False" />
+    
+    <Grid RowDefinitions="Auto,*" ColumnDefinitions="5*,Auto,*" Margin="8">
+      <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Left">
+        <MenuItem Header="_File">
+          <MenuItem Header="_Open..." />
+        </MenuItem>
+      </Menu>
 
+      <TabControl Grid.Row="1" Grid.Column="0" Padding="0">
+        <TabControl.ItemTemplate>
+          <DataTemplate>
+            <TextBlock Text="{Binding Header, RelativeSource={RelativeSource FindAncestor, AncestorType=TabItem}}" />
+          </DataTemplate>
+        </TabControl.ItemTemplate>
+        
+        <TabControl.ContentTemplate>
+          <DataTemplate>
+            <Border BorderThickness="1"
+                    BorderBrush="{DynamicResource SystemControlForegroundBaseMediumLowBrush}"
+                    Background="{DynamicResource CanvasColor}">
+              <Canvas />
+            </Border>
+          </DataTemplate>
+        </TabControl.ContentTemplate>
+        
+        <TabItem Header="Circuit 1">
+          
+        </TabItem>
+      </TabControl>
+      
+
+      <GridSplitter Grid.Row="1" Grid.Column="1" ResizeDirection="Columns" Background="Transparent" />
+
+      <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Vertical">
+        <TextBlock Text="Properties" Margin="8" />
+
+        <ItemsControl Margin="4" Items="{Binding SelectedComponent.Properties}">
+          <ItemsControl.DataTemplates>
+            <DataTemplate DataType="{x:Type model:BooleanProperty}">
+              <CheckBox Margin="4,4,4,8" Content="{Binding Name}" />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type model:IntegerProperty}">
+              <Grid RowDefinitions="Auto,Auto" Margin="0,4">
+                <TextBlock Grid.Row="0" Margin="4,0" Text="{Binding Name}" />
+                <TextBox Grid.Row="1" Margin="4" />
+              </Grid>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type model:DirectionProperty}">
+              <Grid RowDefinitions="Auto,Auto" Margin="0,4">
+                <TextBlock Grid.Row="0" Margin ="4,0" Text="{Binding Name}" />
+                <ComboBox Grid.Row="1" Margin="4" Items="{Binding Source={local:EnumBindingSource {x:Type model:Direction}}, Mode=OneTime}" SelectedItem="{Binding Value, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+              </Grid>
+            </DataTemplate>
+          </ItemsControl.DataTemplates>
+
+        </ItemsControl>
+      </StackPanel>
+    </Grid>
+  </Panel>
 </Window>

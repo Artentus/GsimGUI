@@ -5,7 +5,7 @@ using System;
 
 namespace GsimGUI
 {
-    public class ViewLocator : IDataTemplate
+    internal class ViewLocator : IDataTemplate
     {
         public IControl Build(object data)
         {

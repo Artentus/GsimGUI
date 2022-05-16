@@ -6,8 +6,12 @@ using GsimGUI.Views;
 
 namespace GsimGUI
 {
-    public partial class App : Application
+    internal partial class App : Application
     {
+        public static new App? Current => Application.Current as App;
+
+        public Theme Theme => (Theme)Styles[0];
+
         public override void Initialize()
         {
             AvaloniaXamlLoader.Load(this);
