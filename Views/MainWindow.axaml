@@ -2,6 +2,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:GsimGUI.ViewModels"
         xmlns:model="using:GsimGUI.Models"
+        xmlns:lang="using:GsimGUI.Localization"
         xmlns:local="using:GsimGUI"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -25,16 +26,19 @@
     
     <Grid RowDefinitions="Auto,Auto,*,Auto,*" ColumnDefinitions="5*,Auto,*" Margin="10">
       <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Left">
-        <MenuItem Header="_File">
-          <MenuItem Header="_Open..." />
+        <MenuItem Header="{lang:Localized MainMenu::File}">
+          <MenuItem Header="{lang:Localized MainMenu::Open}" />
         </MenuItem>
       </Menu>
 
       <DockPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,8" HorizontalAlignment="Stretch">
         <Button DockPanel.Dock="Left" Content="Start Simulation" />
         <ComboBox DockPanel.Dock="Right" HorizontalAlignment="Right"
-                  Items="{Binding Source={local:EnumBindingSource {x:Type local:ThemeMode}}, Mode=OneTime}"
-                  SelectedItem="{Binding Theme.Mode, Mode=TwoWay}" />
+                  Items="{Binding Source={local:EnumValues {x:Type local:ThemeMode}}, Mode=OneTime}"
+                  SelectedItem="{Binding Theme.Mode, Source={x:Static local:App.Current}, Mode=TwoWay}" />
+        <ComboBox DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="8,0"
+                  Items="{Binding AvailableCultures, Source={x:Static lang:Localization.Instance}, Mode=OneTime}"
+                  SelectedItem="{Binding SelectedCulture, Source={x:Static lang:Localization.Instance}, Mode=TwoWay}" />
       </DockPanel>
 
       <TabControl Grid.Row="2" Grid.RowSpan="3" Grid.Column="0" Padding="0">
@@ -98,7 +102,7 @@
               <Grid RowDefinitions="Auto,Auto" Margin="0,4">
                 <TextBlock Grid.Row="0" Margin ="4,0" Text="{Binding Name}" />
                 <ComboBox Grid.Row="1" Margin="4" HorizontalAlignment="Stretch"
-                          Items="{Binding Source={local:EnumBindingSource {x:Type model:Direction}}, Mode=OneTime}"
+                          Items="{Binding Source={local:EnumValues {x:Type model:Direction}}, Mode=OneTime}"
                           SelectedItem="{Binding Value, Mode=TwoWay}" />
               </Grid>
             </DataTemplate>

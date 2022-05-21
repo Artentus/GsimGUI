@@ -2,11 +2,11 @@
 
 namespace GsimGUI
 {
-    internal class EnumBindingSource : MarkupExtension<Array>
+    internal class EnumValuesExtension : MarkupExtension<Array>
     {
         public Type EnumType { get; }
 
-        public EnumBindingSource(Type enumType)
+        public EnumValuesExtension(Type enumType)
         {
             if (enumType is null) throw new ArgumentNullException(nameof(enumType));
             if (!enumType.IsEnum) throw new ArgumentException("Type must be an Enum.");

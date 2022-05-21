@@ -6,8 +6,6 @@ namespace GsimGUI.ViewModels
     {
         private IHasProperties? _selectedComponent;
 
-        public Theme Theme => App.Current!.Theme;
-
         public IHasProperties? SelectedComponent
         {
             get => _selectedComponent;
