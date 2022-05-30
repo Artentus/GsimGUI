@@ -1,4 +1,6 @@
 ﻿{
   "MainMenu::File": "_Datei",
-  "MainMenu::Open": "Öffnen..."
+  "MainMenu::Open": "Öffnen...",
+  "ThemeMode::Light": "Hell",
+  "ThemeMode::Dark": "Dunkel"
 }

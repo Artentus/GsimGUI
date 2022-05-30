@@ -57,7 +57,7 @@ namespace GsimGUI.Localization
         }
 
 
-        public static Localization Instance = new();
+        public static readonly Localization Instance = new();
 
 
         private readonly Dictionary<CultureInfo, IReadOnlyDictionary<string, string>> _locales;

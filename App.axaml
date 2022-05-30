@@ -1,7 +1,9 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="using:GsimGUI"
+             xmlns:lang="using:GsimGUI.Localization"
              x:Class="GsimGUI.App">
+  
   <Application.DataTemplates>
     <local:ViewLocator />
   </Application.DataTemplates>
@@ -9,4 +11,10 @@
   <Application.Styles>
     <local:Theme Mode="Dark" />
   </Application.Styles>
+
+  <Application.Resources>
+    <local:NthValueConverter x:Key="NthValueConverter" />
+    <lang:LocalizeEnumConverter x:TypeArguments="local:ThemeMode" x:Key="ThemeModeConverter" />
+    <lang:CultureInfoConverter x:Key="CultureInfoConverter" />
+  </Application.Resources>
 </Application>
