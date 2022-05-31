@@ -2,5 +2,13 @@
   "MainMenu::File": "_Datei",
   "MainMenu::Open": "Öffnen...",
   "ThemeMode::Light": "Hell",
-  "ThemeMode::Dark": "Dunkel"
+  "ThemeMode::Dark": "Dunkel",
+  "Direction::In": "Eingang",
+  "Direction::Out": "Ausgang",
+  "Direction::InOut": "Bidirektional",
+  "Component::Bus": "Bus",
+  "Component::Pin": "Pin",
+  "Header::Properties": "Eigenschaften: ",
+  "Property::Width": "Breite",
+  "Property::Direction": "Richtung"
 }

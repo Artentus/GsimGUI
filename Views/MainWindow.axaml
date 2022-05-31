@@ -92,7 +92,7 @@
       
       <StackPanel Grid.Row="4" Grid.Column="2" Orientation="Vertical">
         <Grid ColumnDefinitions="Auto,Auto" Margin="8">
-          <TextBlock Grid.Column="0" Text="Properties: " />
+          <TextBlock Grid.Column="0" Text="{lang:Localized Header::Properties}" />
           <TextBlock Grid.Column="1" Text="{Binding SelectedComponent.Name}" />
         </Grid>
 
@@ -104,7 +104,7 @@
 
             <DataTemplate DataType="{x:Type model:IntegerProperty}">
               <Grid RowDefinitions="Auto,Auto" Margin="0,4">
-                <TextBlock Grid.Row="0" Margin="4,0" Text="{Binding Name}" />
+                <TextBlock Grid.Row="0" Margin="4,0" Text="{lang:LocalizedBinding NameKey, Converter={StaticResource StringConverter}, Mode=OneWay}" />
                 <NumericUpDown Grid.Row="1" Margin="4"
                                Value="{Binding Value}" Increment="1"
                                Minimum="{Binding MinimumValue, Mode=OneTime}"
@@ -114,10 +114,16 @@
 
             <DataTemplate DataType="{x:Type model:DirectionProperty}">
               <Grid RowDefinitions="Auto,Auto" Margin="0,4">
-                <TextBlock Grid.Row="0" Margin ="4,0" Text="{Binding Name}" />
+                <TextBlock Grid.Row="0" Margin ="4,0" Text="{lang:LocalizedBinding NameKey, Converter={StaticResource StringConverter}, Mode=OneWay}" />
                 <ComboBox Grid.Row="1" Margin="4" HorizontalAlignment="Stretch"
                           Items="{Binding Source={local:EnumValues {x:Type model:Direction}}, Mode=OneTime}"
-                          SelectedItem="{Binding Value, Mode=TwoWay}" />
+                          SelectedItem="{Binding Value, Mode=TwoWay}">
+                  <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                      <TextBlock Text="{lang:LocalizedBinding ., Converter={StaticResource DirectionConverter}, Mode=OneWay}" />
+                    </DataTemplate>
+                  </ComboBox.ItemTemplate>
+                </ComboBox>
               </Grid>
             </DataTemplate>
           </ItemsControl.DataTemplates>

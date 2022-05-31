@@ -2,5 +2,13 @@
   "MainMenu::File": "_File",
   "MainMenu::Open": "Open...",
   "ThemeMode::Light": "Light",
-  "ThemeMode::Dark": "Dark"
+  "ThemeMode::Dark": "Dark",
+  "Direction::In": "Input",
+  "Direction::Out": "Output",
+  "Direction::InOut": "Bidirectional",
+  "Component::Bus": "Bus",
+  "Component::Pin": "Pin",
+  "Header::Properties": "Properties: ",
+  "Property::Width": "Width",
+  "Property::Direction": "Direction"
 }

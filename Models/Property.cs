@@ -8,11 +8,14 @@ namespace GsimGUI.Models
     {
         public string Name { get; }
 
+        public string NameKey { get; }
+
         protected Property(string name)
         {
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
 
             Name = name;
+            NameKey = "Property::" + name;
         }
 
         public abstract void Reset();

@@ -19,6 +19,8 @@ namespace GsimGUI.Models
     {
         public string Name { get; }
 
+        public string NameKey { get; }
+
         public abstract IReadOnlyList<Property> Properties { get; }
 
         protected void RegisterPropertyEvents()
@@ -38,6 +40,7 @@ namespace GsimGUI.Models
         protected Component(string name)
         {
             Name = name;
+            NameKey = "Component::" + name;
         }
     }
 }

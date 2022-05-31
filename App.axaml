@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="using:GsimGUI"
              xmlns:lang="using:GsimGUI.Localization"
+             xmlns:model="using:GsimGUI.Models"
              x:Class="GsimGUI.App">
   
   <Application.DataTemplates>
@@ -14,7 +15,9 @@
 
   <Application.Resources>
     <local:NthValueConverter x:Key="NthValueConverter" />
+    <lang:LocalizeStringConverter x:Key="StringConverter" />
     <lang:LocalizeEnumConverter x:TypeArguments="local:ThemeMode" x:Key="ThemeModeConverter" />
+    <lang:LocalizeEnumConverter x:TypeArguments="model:Direction" x:Key="DirectionConverter" />
     <lang:CultureInfoConverter x:Key="CultureInfoConverter" />
   </Application.Resources>
 </Application>
